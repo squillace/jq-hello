@@ -22,16 +22,23 @@ mixins:
   - jq
 
 install:
-
+  - exec:
+      command: bash
+      description: "trying it in exec..."
+      flags:
+        c: "jq --arg JOB_NAME fred '.parameters.function_app_name.value=$JOB_NAME' json-test-file.json"
   - jq:
-      description: "invoking jq ....."
+      description: "trying it with more gusto.... using the mixin..."
       arguments:
         - --arg 
-        - "JOB_NAME fred" 
-        - --arg 
-        - "EVENT_HUB_NAMESPACE anjay"
-        - "'.parameters.app_plan_name.value=$JOB_NAME | .parameters.webjobs_account_string.value=$EVENT_HUB_NAMESPACE'"
+        - JOB_NAME 
+        - bob
+        - --arg
+        - OTHER_NAME
+        - Carolyn
+        - ".parameters.images_account_string.value=$JOB_NAME | .parameters.face_api_key.value=$OTHER_NAME"
         - json-test-file.json
+
 
 upgrade:
   - exec:
