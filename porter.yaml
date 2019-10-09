@@ -15,7 +15,7 @@ tag: squillace/jq-hello-bundle:latest
 parameters:
   - name: JQ_FILTER
     type: string
-    default: "."
+    default: ".parameters.images_account_string.value=$JOB_NAME | .parameters.face_api_key.value=$OTHER_NAME"
 
 mixins:
   - exec
@@ -36,7 +36,7 @@ install:
         - --arg
         - OTHER_NAME
         - Carolyn
-        - ".parameters.images_account_string.value=$JOB_NAME | .parameters.face_api_key.value=$OTHER_NAME"
+        - "{{ bundle.parameters.JQ_FILTER }}"
         - json-test-file.json
 
 
