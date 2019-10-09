@@ -26,7 +26,7 @@ install:
       command: bash
       description: "trying it in exec..."
       flags:
-        c: "jq --arg JOB_NAME fred '.parameters.function_app_name.value=$JOB_NAME' json-test-file.json"
+        c: "jq --arg JOB_NAME fred --arg OTHER_NAME Carolyn '{{ bundle.parameters.JQ_FILTER }}' json-test-file.json"
   - jq:
       description: "trying it with more gusto.... using the mixin..."
       arguments:
